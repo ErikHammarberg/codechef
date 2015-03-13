@@ -15,7 +15,10 @@ public class mainTest {
 	@Test
 	public void testMain() throws NumberFormatException, IOException {
 		String[] args = new String[1];
-		String testInput = "1\n5 12 1 12 4 4\nacccdadceb\n2";
+		String testInput =  "1\n"+
+							"5 12 1 12 4 4\n"+
+							"acccdadceb\n"+
+							"2";
 		InputStream in = new ByteArrayInputStream(testInput.getBytes());
 		System.setIn(in);
 		main.main(args);

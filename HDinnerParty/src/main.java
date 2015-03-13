@@ -19,6 +19,8 @@ public class main {
 
 
 class DinnerReader {
+	int[] amountArray = new int[15];
+	int[] valueArray = new int[15];
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 	Map<Character, Ingredient> ingredients = new TreeMap<Character,Ingredient>();
@@ -28,10 +30,10 @@ class DinnerReader {
 		int noGuests = Integer.parseInt(reader.readLine());
 		System.out.println("no guests: "+noGuests);
 
+		extractIngredients();
+		findCombo(Integer.parseInt(reader.readLine()));
 		
-		for(String s : reader.readLine().split(" ")){
-			
-		}
+
 	}
 	public void extractIngredients() throws IOException{
 
@@ -41,16 +43,32 @@ class DinnerReader {
 		for(int i = 1; i <= noIngr; i++){
 			char name = alfabet.charAt(i);
 			int value = Integer.parseInt(values[i]);
-			Ingredient ing = new Ingredient(""+name, value, 0);
-			ingredients.put(name,ing );
+			valueArray[i] = value;
+			
+//			Ingredient ing = new Ingredient(""+name, value, 0);
+//			ingredients.put(name,ing );
 		}
 		/*String[] names = reader.readLine().split(" ");
 		for (int i = 0; i < names.length ; i++){
 			
 		}*/
+		String[] order = reader.readLine().split(" ");
+		for(String ingred : order) {
+			amountArray[alfabet.indexOf(ingred)]++;
+		}
 	}
+	public void findCombo(int targetValue) {
+		int remainderProt = targetValue;
+		for (int i = 0; i < valueArray.length; i++) {
+			int remainsCurrent = amountArray[i];
+			while (remainsCurrent > 0) {
 
+			}
+		}
+		
+	}
 }
+
 
 class Ingredient {
 	public final String name;
@@ -61,4 +79,8 @@ class Ingredient {
 		proteinCount = pC;
 		quantity = q;
 	}
+}
+class Solution {
+	public int remainder;
+	
 }
