@@ -15,14 +15,21 @@ public class mainTest {
 	@Test
 	public void testMain() throws NumberFormatException, IOException {
 		String[] args = new String[1];
-		String testInput =  "1\n"+
+		String testInput =  "3\n"+
 							"5 12 1 12 4 4\n"+
 							"acccdadceb\n"+
-							"2";
+							"2\n"+
+							"3 5 4 6\n"+
+							"abcbacbabcc\n"+
+							"15\n"+
+							"2 3 4\n"+
+							"baba\n"+
+							"7";
 		InputStream in = new ByteArrayInputStream(testInput.getBytes());
 		System.setIn(in);
 		main.main(args);
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
+		
 	}
 
 }
