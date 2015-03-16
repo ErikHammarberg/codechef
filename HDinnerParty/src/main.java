@@ -23,13 +23,14 @@ class DinnerReader {
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 	final String alfabet = "abcdefghijklmnopqrstuvwxyz";
+	int targetValue;
 	
 	public void readInput() throws NumberFormatException, IOException{
 		int noGuests = Integer.parseInt(reader.readLine());
 		for(int i = 0;i<noGuests;i++) {
 			extractIngredients();
 //			prettyPrint();
-			Solution sol = findCombo(Integer.parseInt(reader.readLine()));
+			Solution sol = findCombo(targetValue);
 			if(sol != null) {
 				for(Integer j : sol.ingredients){
 					System.out.print(alfabet.charAt(j));
@@ -53,8 +54,9 @@ class DinnerReader {
 			valueArray[i-1] = value;
 			
 		}
-		
+		// Here starts the Heavy Hauling
 		String order = reader.readLine();
+		targetValue = Integer.parseInt(reader.readLine());
 		for(char ingred : order.toCharArray()) {
 			amountArray[alfabet.indexOf(ingred)]++;
 		}
