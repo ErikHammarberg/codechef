@@ -24,7 +24,29 @@ class DinnerReader {
 	BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 	final String alfabet = "abcdefghijklmnopqrstuvwxyz";
 	int targetValue;
+	LinkedList<Solution> solutionList = new LinkedList<Solution>();
 	
+	
+	public void readInput2() throws NumberFormatException, IOException{
+		solutionList.add(new Solution(targetValue));
+		int noGuests = Integer.parseInt(reader.readLine());
+		for(int i = 0;i<noGuests;i++) {
+			String[] values = reader.readLine().split(" ");
+			String order = reader.readLine();
+			targetValue = Integer.parseInt(reader.readLine());
+			
+			generatePatterns(values);
+			
+		}
+	}
+	
+	private void generatePatterns(String[] values) {
+		int remainder = targetValue;
+		
+		
+		
+	}
+
 	public void readInput() throws NumberFormatException, IOException{
 		int noGuests = Integer.parseInt(reader.readLine());
 		for(int i = 0;i<noGuests;i++) {
@@ -58,9 +80,25 @@ class DinnerReader {
 		String order = reader.readLine();
 		targetValue = Integer.parseInt(reader.readLine());
 		for(char ingred : order.toCharArray()) {
-			amountArray[alfabet.indexOf(ingred)]++;
+			int value = valueArray[alfabet.indexOf(ingred)];
+			addToSolutions(value, ingred);
 		}
 	}
+	private void addToSolutions(int value, char ingred) {
+		// TODO Auto-generated method stub
+		LinkedList<Solution> tempList = new LinkedList<Solution>();
+		for(Solution s : solutionList) {
+			Solution old = s.add(value, ingred);
+			if(old != null) {
+				if(s.isComplete){
+					
+				}
+				tempList.add(old);
+			}
+		}
+		
+	}
+
 	public void prettyPrint () {
 		for(int i = 0; i<amountArray.length; i++){
 			System.out.print("Ingredient: " +alfabet.charAt(i));
@@ -93,28 +131,38 @@ class DinnerReader {
 	}
 }
 
-class Solution {
+class Solution implements Comparable<Solution>{
 	public int remainder;
-	public LinkedList<Integer> ingredients;
+//	public LinkedList<Character> ingredients;
+	String ingredients;
 	boolean isComplete;
 	
 	public Solution(int remainder) {
 		this.remainder = remainder;
-		ingredients = new LinkedList<Integer>();
+		ingredients = "";
 	}
 	public Solution(Solution other) {
 		remainder = other.remainder;
-		ingredients = new LinkedList<Integer>(other.ingredients);
+		ingredients = new String(other.ingredients);
 	}
-	public Solution add(int value, int position) {
+	public Solution add(int value, char position) {
 		if (value > remainder)
 			return null;
 		Solution temp = new Solution(this);
 		remainder -= value;
-		ingredients.add(position);
+		ingredients += position;
 		if(remainder == 0)
 			isComplete = true;
 		return temp;
+	}
+	@Override
+	public int compareTo(Solution arg0) {
+		// TODO Auto-generated method stub
+		return this.ingredients.compareTo(arg0.ingredients);
+	}
+	@Override
+	public boolean equals(Solution other) {
+		return ingredients.equals(other.ingredients);
 	}
 	
 }
