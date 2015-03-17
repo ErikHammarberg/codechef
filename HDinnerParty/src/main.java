@@ -25,6 +25,7 @@ class DinnerReader {
 	BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 	final String alfabet = "abcdefghijklmnopqrstuvwxyz";
 	int targetValue;
+	int minValue;
 	
 	public void readInput() throws NumberFormatException, IOException{
 		int noGuests = Integer.parseInt(reader.readLine());
@@ -46,14 +47,16 @@ class DinnerReader {
 	public void extractIngredients() throws IOException{
 
 		String[] values = reader.readLine().split(" ");
+		minValue = Integer.MAX_VALUE;
 		
 		int noIngr = Integer.parseInt(values[0]);
 		amountArray = new int[noIngr];
 		valueArray = new int[noIngr];
 		for(int i = 1; i <= noIngr; i++){
 			int value = Integer.parseInt(values[i]);
-			valueArray[i-1] = value;
 			
+			valueArray[i-1] = value;
+			minValue = Math.min(minValue, value);
 		}
 		// Here starts the Heavy Hauling
 		String order = reader.readLine();
@@ -78,9 +81,10 @@ class DinnerReader {
 			
 			while (remainsElementInLoop > 0) {
 
-				if(remainsTarget >= valueArray[i]) {
+				if(remainsTarget == valueArray[i] ||
+						remainsTarget - valueArray[i] >= minValue) {
 					remainsElementInLoop--;
-					remainsTarget-= valueArray[i];
+					remainsTarget -= valueArray[i];
 					solutionList.add(i);
 					if(remainsTarget == 0) {
 						return solutionList;
