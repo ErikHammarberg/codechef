@@ -31,5 +31,16 @@ public class mainTest {
 		//fail("Not yet implemented");
 		
 	}
+	@Test
+	public void hugeTest() throws Exception {
+		String[] args = new String[1];
+		String testInput = "1\n"+
+							"10 14 12 7 2 9 3 5 3 12 8\n"+
+							"abcdefghijjdfeajcfghjdcdfgjaedfdfdfhjjjjjddffjdjdjfjdaaaaddffdfdjjjdfjdfjdjfdjdjdjfjdfjdfjdjfdjdjdjjdjfdaaadjfdjfdjfdjf\n"+
+							"180";
+		InputStream in = new ByteArrayInputStream(testInput.getBytes());
+		System.setIn(in);
+		main.main(args);
+	}
 
 }
